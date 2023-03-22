@@ -7,14 +7,14 @@ export const EditPage = ({ data }) => {
   const [editedName, setEditedName] = useState(data.name);
 
   const postdata = async (e) => {
-    // const url = "/";
+    const url = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
     e.preventDefault();
     console.log(editedName);
     const cred = {
       name: editedName,
       id: data.id,
     };
-    await fetch("/api/api-handler", {
+    await fetch(`${url}/api/api-handler`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
