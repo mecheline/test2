@@ -10,7 +10,7 @@ export default function Home({lists}) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch("https://kunda-test2.vercel.app/api/api-handler", {
+  const response = await fetch("api/api-handler", {
     method: "GET",
   });
   const lists = await response.json();

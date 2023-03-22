@@ -7,7 +7,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export const HomePage = ({ lists }) => {
   const { mutate } = useSWRConfig();
-  const url = "https://kunda-test2.vercel.app/api/api-handler";
+  const url = "api/api-handler";
 
   const [names, setNames] = useState("");
   const [namesList, setNamesList] = useState();
@@ -19,6 +19,7 @@ export const HomePage = ({ lists }) => {
 
   async function postdata(e) {
     e.preventDefault();
+    console.log(names);
 
     const result = names.split(",");
     setNames("");
@@ -29,7 +30,7 @@ export const HomePage = ({ lists }) => {
       out.push({ name: item });
     });
 
-    await fetch("https://kunda-test2.vercel.app/api/api-handler", {
+    await fetch("api/api-handler", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -105,7 +106,7 @@ export const HomePage = ({ lists }) => {
                 <th scope="row">{i + 1}</th>
                 <td>{record.name}</td>
                 <td>
-                  <Link href={`https://kunda-test2.vercel.app/${record._id}`}>
+                  <Link href={`/${record._id}`}>
                     <i class="bi bi-pencil-square"></i>
                   </Link>
 
