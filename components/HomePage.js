@@ -7,7 +7,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export const HomePage = ({ lists }) => {
   const { mutate } = useSWRConfig();
-  const url = "api/api-handler";
+  const url = "/api/api-handler";
 
   const [names, setNames] = useState("");
   const [namesList, setNamesList] = useState();
@@ -30,7 +30,7 @@ export const HomePage = ({ lists }) => {
       out.push({ name: item });
     });
 
-    await fetch("api/api-handler", {
+    await fetch("/api/api-handler", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

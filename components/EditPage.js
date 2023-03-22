@@ -14,7 +14,7 @@ export const EditPage = ({ data }) => {
       name: editedName,
       id: data.id,
     };
-    await fetch("api/api-handler", {
+    await fetch("/api/api-handler", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
