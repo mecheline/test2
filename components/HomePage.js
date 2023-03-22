@@ -7,17 +7,15 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export const HomePage = ({ lists }) => {
   const { mutate } = useSWRConfig();
-  const url = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/api-handler`;
+  const url = "https://kunda-test2.vercel.app/api/api-handler";
 
   const [names, setNames] = useState("");
-  const [namesList, setNamesList] = useState([lists]);
+  const [namesList, setNamesList] = useState();
 
   const { data, error } = useSWR(url, () => fetcher(url));
-  if (data) {
-    setNamesList(data);
-  }
-  // if (!data) return <h4>Loading...</h4>;
-  // if (error) return <h4>Try again later</h4>;
+
+  if (!data) return <h4>Loading...</h4>;
+  if (error) return <h4>Try again later</h4>;
 
   async function postdata(e) {
     e.preventDefault();
@@ -31,7 +29,7 @@ export const HomePage = ({ lists }) => {
       out.push({ name: item });
     });
 
-    await fetch(url, {
+    await fetch("https://kunda-test2.vercel.app/api/api-handler", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +86,7 @@ export const HomePage = ({ lists }) => {
       </form>
 
       <table class="table table-hover table-responsive">
-        {namesList.length > 0 ? (
+        {data.length > 0 ? (
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -101,8 +99,8 @@ export const HomePage = ({ lists }) => {
         )}
 
         <tbody>
-          {namesList ? (
-            namesList.map((record, i) => (
+          {data ? (
+            data.map((record, i) => (
               <tr key={record._id}>
                 <th scope="row">{i + 1}</th>
                 <td>{record.name}</td>
