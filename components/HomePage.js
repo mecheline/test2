@@ -88,7 +88,7 @@ export const HomePage = () => {
       </form>
 
       <table class="table table-hover table-responsive">
-        {separatedName.length > 0 ? (
+        {data.length > 0 ? (
           <thead>
             <tr>
               <th scope="col">#</th>
