@@ -5,16 +5,19 @@ import Link from "next/link";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export const HomePage = () => {
+export const HomePage = ({ lists }) => {
   const { mutate } = useSWRConfig();
-  const url = "https://kunda-test2.vercel.app/api/all-users";
+  const url = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/api-handler`;
 
   const [names, setNames] = useState("");
-  const [separatedName, setSeparatedName] = useState();
+  const [namesList, setNamesList] = useState([lists]);
 
   const { data, error } = useSWR(url, () => fetcher(url));
-  if (!data) return <h4>Loading...</h4>;
-  if (error) return <h4>Try again later</h4>;
+  if (data) {
+    setNamesList(data);
+  }
+  // if (!data) return <h4>Loading...</h4>;
+  // if (error) return <h4>Try again later</h4>;
 
   async function postdata(e) {
     e.preventDefault();
@@ -28,7 +31,7 @@ export const HomePage = () => {
       out.push({ name: item });
     });
 
-    await fetch("https://kunda-test2.vercel.app/api/create-user", {
+    await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,16 +52,13 @@ export const HomePage = () => {
   const handleDelete = async (name, id) => {
     if (window.confirm(`Do you want to delete ${name}`)) {
       try {
-        const response = await fetch(
-          "https://kunda-test2.vercel.app/api/delete-user",
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(id),
-          }
-        );
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(id),
+        });
         const output = await response.json();
         console.log(output);
 
@@ -88,7 +88,7 @@ export const HomePage = () => {
       </form>
 
       <table class="table table-hover table-responsive">
-        {data.length > 0 ? (
+        {namesList.length > 0 ? (
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -101,22 +101,26 @@ export const HomePage = () => {
         )}
 
         <tbody>
-          {data.map((record, i) => (
-            <tr key={record._id}>
-              <th scope="row">{i + 1}</th>
-              <td>{record.name}</td>
-              <td>
-                <Link href={`https://kunda-test2.vercel.app/${record._id}`}>
-                  <i class="bi bi-pencil-square"></i>
-                </Link>
+          {namesList ? (
+            namesList.map((record, i) => (
+              <tr key={record._id}>
+                <th scope="row">{i + 1}</th>
+                <td>{record.name}</td>
+                <td>
+                  <Link href={`https://kunda-test2.vercel.app/${record._id}`}>
+                    <i class="bi bi-pencil-square"></i>
+                  </Link>
 
-                <i
-                  class="bi bi-x-circle mx-2"
-                  onClick={() => handleDelete(record.name, record._id)}
-                ></i>
-              </td>
-            </tr>
-          ))}
+                  <i
+                    class="bi bi-x-circle mx-2"
+                    onClick={() => handleDelete(record.name, record._id)}
+                  ></i>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <h4>Loading...</h4>
+          )}
         </tbody>
       </table>
     </div>

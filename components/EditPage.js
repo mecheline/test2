@@ -7,13 +7,14 @@ export const EditPage = ({ data }) => {
   const [editedName, setEditedName] = useState(data.name);
 
   const postdata = async (e) => {
+    const url = "https://kunda-test2.vercel.app";
     e.preventDefault();
     console.log(editedName);
     const cred = {
       name: editedName,
       id: data.id,
     };
-    await fetch("https://kunda-test2.vercel.app/api/update-user", {
+    await fetch("https://kunda-test2.vercel.app/api/api-handler", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +24,7 @@ export const EditPage = ({ data }) => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        router.push("https://kunda-test2.vercel.app/");
+        router.push(url);
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +35,7 @@ export const EditPage = ({ data }) => {
       <h4>Edit Card</h4>
       <i
         class="bi bi-skip-backward-circle fs-3"
-        onClick={() => router.push("https://kunda-test2.vercel.app/")}
+        onClick={() => router.back()}
       ></i>
       <form onSubmit={postdata}>
         <div class="my-3">
