@@ -8,6 +8,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 export const HomePage = ({ lists }) => {
   const { mutate } = useSWRConfig();
   const url = "https://kunda-test2.vercel.app/api/api-handler";
+  const uri = "https://kunda-test2.vercel.app";
 
   const [names, setNames] = useState("");
   const [namesList, setNamesList] = useState();
@@ -30,7 +31,7 @@ export const HomePage = ({ lists }) => {
       out.push({ name: item });
     });
 
-    await fetch("https://kunda-test2.vercel.app/api/api-handler", {
+    await fetch(`${uri}/api/api-handler`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,16 +52,13 @@ export const HomePage = ({ lists }) => {
   const handleDelete = async (name, id) => {
     if (window.confirm(`Do you want to delete ${name}`)) {
       try {
-        const response = await fetch(
-          "https://kunda-test2.vercel.app/api/api-handler",
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(id),
-          }
-        );
+        const response = await fetch(`${uri}/api/api-handler`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(id),
+        });
         const output = await response.json();
         console.log(output);
 
