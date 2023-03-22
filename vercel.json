@@ -15,5 +15,11 @@
         }
       ]
     }
+  ],
+  "routes": [
+    {
+      "src": "http://localhost:3000/api/api-handler",
+      "dest": "https://kunda-test2.vercel.app/api/api-handler"
+    }
   ]
 }

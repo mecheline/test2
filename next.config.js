@@ -22,6 +22,14 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/api-handler",
+        destination: "https://kunda-test2.vercel.app/api/api-handler",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
