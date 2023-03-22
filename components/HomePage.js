@@ -7,7 +7,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export const HomePage = ({ lists }) => {
   const { mutate } = useSWRConfig();
-  const url = `${process.env.NEXTAUTH_URL}/api/api-handler`;
+  const url = `https://kunda-test2.vercel.app/api/api-handler`;
 
   const [names, setNames] = useState("");
   const [namesList, setNamesList] = useState();
@@ -106,7 +106,7 @@ export const HomePage = ({ lists }) => {
                 <th scope="row">{i + 1}</th>
                 <td>{record.name}</td>
                 <td>
-                  <Link href={`${process.env.NEXTAUTH_URL}/${record._id}`}>
+                  <Link href={`https://kunda-test2.vercel.app/${record._id}`}>
                     <i class="bi bi-pencil-square"></i>
                   </Link>
 

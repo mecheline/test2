@@ -7,7 +7,7 @@ export const EditPage = ({ data }) => {
   const [editedName, setEditedName] = useState(data.name);
 
   const postdata = async (e) => {
-    const url = process.env.NEXTAUTH_URL;
+    const url = "https://kunda-test2.vercel.app";
     e.preventDefault();
     console.log(editedName);
     const cred = {
