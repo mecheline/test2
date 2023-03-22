@@ -13,7 +13,7 @@ export const EditPage = ({ data }) => {
       name: editedName,
       id: data.id,
     };
-    await fetch(`http://localhost:3000/api/update-user`, {
+    await fetch("https://kunda-test2.vercel.app/api/update-user", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const EditPage = ({ data }) => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        router.push("/");
+        router.push("https://kunda-test2.vercel.app/");
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +34,7 @@ export const EditPage = ({ data }) => {
       <h4>Edit Card</h4>
       <i
         class="bi bi-skip-backward-circle fs-3"
-        onClick={() => router.push("/")}
+        onClick={() => router.push("https://kunda-test2.vercel.app/")}
       ></i>
       <form onSubmit={postdata}>
         <div class="my-3">

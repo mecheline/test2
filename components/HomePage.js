@@ -5,12 +5,12 @@ import Link from "next/link";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export const HomePage = ({ lists }) => {
+export const HomePage = () => {
   const { mutate } = useSWRConfig();
-  const url = "http://localhost:3000/api/all-users";
+  const url = "https://kunda-test2.vercel.app/api/all-users";
 
   const [names, setNames] = useState("");
-  const [separatedName, setSeparatedName] = useState(lists);
+  const [separatedName, setSeparatedName] = useState();
 
   const { data, error } = useSWR(url, () => fetcher(url));
   if (!data) return <h4>Loading...</h4>;
@@ -28,7 +28,7 @@ export const HomePage = ({ lists }) => {
       out.push({ name: item });
     });
 
-    await fetch("/api/create-user", {
+    await fetch("https://kunda-test2.vercel.app/api/create-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,13 +49,16 @@ export const HomePage = ({ lists }) => {
   const handleDelete = async (name, id) => {
     if (window.confirm(`Do you want to delete ${name}`)) {
       try {
-        const response = await fetch("http://localhost:3000/api/delete-user", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(id),
-        });
+        const response = await fetch(
+          "https://kunda-test2.vercel.app/api/delete-user",
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(id),
+          }
+        );
         const output = await response.json();
         console.log(output);
 
@@ -103,7 +106,7 @@ export const HomePage = ({ lists }) => {
               <th scope="row">{i + 1}</th>
               <td>{record.name}</td>
               <td>
-                <Link href={`/${record._id}`}>
+                <Link href={`https://kunda-test2.vercel.app/${record._id}`}>
                   <i class="bi bi-pencil-square"></i>
                 </Link>
 

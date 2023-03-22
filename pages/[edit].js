@@ -23,7 +23,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      data: { name: output.name, id: output._id.toString() },
+      data: output ? { name: output.name, id: output._id.toString() } : "",
     },
   };
 }

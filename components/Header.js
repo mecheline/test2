@@ -4,7 +4,7 @@ export const Header = () => {
   return (
     <nav class="navbar navbar fixed-top navbar-expand-lg bg-light">
       <div class="container">
-        <Link href="/" legacyBehavior>
+        <Link href="https://kunda-test2.vercel.app/" legacyBehavior>
           <a class="navbar-brand">Kunda Test</a>
         </Link>
         <button
@@ -24,7 +24,7 @@ export const Header = () => {
         >
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <Link href="/" legacyBehavior>
+              <Link href="https://kunda-test2.vercel.app/" legacyBehavior>
                 <a class="nav-link active" aria-current="page">
                   Home
                 </a>
