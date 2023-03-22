@@ -1,7 +1,6 @@
 import { EditPage } from "@/components/EditPage";
 import { Layout } from "@/components/Layout";
-import { useRouter } from "next/router";
-import axios from "axios";
+
 import connectDB from "@/lib/db";
 import user from "@/models/user";
 
