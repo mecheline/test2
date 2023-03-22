@@ -11,7 +11,7 @@ export default function Home({ lists }) {
 
 export async function getServerSideProps() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/api-handler`,
+    `${process.env.NEXTAUTH_URL}/api/api-handler`,
     {
       method: "GET",
     }

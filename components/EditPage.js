@@ -7,7 +7,7 @@ export const EditPage = ({ data }) => {
   const [editedName, setEditedName] = useState(data.name);
 
   const postdata = async (e) => {
-    const url = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
+    const url = process.env.NEXTAUTH_URL;
     e.preventDefault();
     console.log(editedName);
     const cred = {
