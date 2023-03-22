@@ -1,8 +1,16 @@
+import NextCors from "nextjs-cors";
 import connectDB from "@/lib/db";
 import User from "@/models/user";
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   await connectDB();
+  await NextCors(req, res, {
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    origin: "http://localhost:3000",
+
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
+
   if (req.method === "GET") {
     try {
       const data = await User.find();
