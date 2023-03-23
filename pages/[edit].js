@@ -2,7 +2,7 @@ import { EditPage } from "@/components/EditPage";
 import { Layout } from "@/components/Layout";
 
 import connectDB from "@/lib/db";
-import user from "@/models/user";
+import User from "@/models/user";
 
 export default function Edit({ data }) {
   console.log(data);
@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
   const { edit } = context.params;
 
   await connectDB();
-  const output = await user.findOne({ _id: edit });
+  const output = await User.findOne({ _id: edit });
 
   console.log(output);
 

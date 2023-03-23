@@ -3,7 +3,10 @@ import useSWR, { useSWRConfig } from "swr";
 
 import Link from "next/link";
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
+const fetcher = (url) =>
+  fetch(url, {
+    method: "GET",
+  }).then((r) => r.json());
 
 export const HomePage = ({ lists }) => {
   const { mutate } = useSWRConfig();
@@ -41,7 +44,7 @@ export const HomePage = ({ lists }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        mutate(url);
+        mutate("https://kunda-test2.vercel.app/api/api-handler");
       })
 
       .catch((err) => {
@@ -62,7 +65,7 @@ export const HomePage = ({ lists }) => {
         const output = await response.json();
         console.log(output);
 
-        mutate(url);
+        mutate("https://kunda-test2.vercel.app/api/api-handler");
       } catch (error) {
         console.log(error);
       }
