@@ -10,8 +10,7 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  let a = true;
-  if (a) {
+  if (process.env.NODE_ENV == "development") {
     return {
       redirect: {
         destination: "https://kunda-test2.vercel.app/",
