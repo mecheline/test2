@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     try {
       const data = await User.find();
 
-      return res.setHeader('Access-Control-Allow-Origin', '*').status(200).json(data);
+      return res.status(200).json(data);
     } catch (error) {
       console.log(error);
     }
@@ -17,10 +17,7 @@ export default async function handler(req, res) {
     console.log(req.body);
     try {
       const insert = await User.insertMany(req.body);
-      return res
-        .setHeader("Access-Control-Allow-Origin", "*")
-        .status(200)
-        .json(insert);
+      return res.status(200).json(insert);
     } catch (error) {
       console.log(error);
     }
@@ -31,10 +28,7 @@ export default async function handler(req, res) {
     const { id, name } = req.body;
     try {
       const record = await User.findByIdAndUpdate(id, { name }, { new: true });
-      res
-        .setHeader("Access-Control-Allow-Origin", "*")
-        .status(200)
-        .json(record);
+      res.status(200).json(record);
     } catch (error) {
       console.log(error);
     }
@@ -44,10 +38,7 @@ export default async function handler(req, res) {
     console.log(req.body);
     try {
       const data = await User.findByIdAndRemove(req.body);
-      return res
-        .setHeader("Access-Control-Allow-Origin", "*")
-        .status(200)
-        .json(data);
+      return res.status(200).json(data);
     } catch (error) {
       console.log(error);
     }
