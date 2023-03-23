@@ -1,23 +1,23 @@
 import { HomePage } from "@/components/HomePage";
 import { Layout } from "@/components/Layout";
 
-export default function Home({ lists }) {
+export default function Home() {
   return (
     <Layout title="Home">
-      <HomePage lists={lists} />
+      <HomePage />
     </Layout>
   );
 }
 
 export async function getServerSideProps() {
-  const response = await fetch(
-    "https://kunda-test2.vercel.app/api/api-handler",
-    {
-      method: "GET",
-    }
-  );
-  const lists = await response.json();
-  console.log(lists);
+  // const response = await fetch(
+  //   "https://kunda-test2.vercel.app/api/api-handler",
+  //   {
+  //     method: "GET",
+  //   }
+  // );
+  // const lists = await response.json();
+  // console.log(lists);
 
   return {
     // props: {
@@ -25,7 +25,7 @@ export async function getServerSideProps() {
     // },
     redirect: {
       destination: "https://kunda-test2.vercel.app/",
-      permanent: true,
+      permanent: false,
     },
   };
 }
