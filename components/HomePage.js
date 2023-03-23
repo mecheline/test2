@@ -23,6 +23,9 @@ export const HomePage = () => {
   async function postdata(e) {
     e.preventDefault();
     console.log(names);
+    if (names.length === 0 || names.trim() == "") {
+      return;
+    }
 
     const result = names.split(",");
     setNames("");
