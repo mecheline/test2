@@ -8,13 +8,12 @@ const fetcher = (url) =>
     method: "GET",
   }).then((r) => r.json());
 
-export const HomePage = ({ lists }) => {
+export const HomePage = () => {
   const { mutate } = useSWRConfig();
   const url = "https://kunda-test2.vercel.app/api/api-handler";
   const uri = "https://kunda-test2.vercel.app";
 
   const [names, setNames] = useState("");
-  const [namesList, setNamesList] = useState();
 
   const { data, error } = useSWR(url, () => fetcher(url));
 
@@ -44,7 +43,7 @@ export const HomePage = ({ lists }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        mutate("https://kunda-test2.vercel.app/api/api-handler");
+        mutate(url);
       })
 
       .catch((err) => {
@@ -65,7 +64,7 @@ export const HomePage = ({ lists }) => {
         const output = await response.json();
         console.log(output);
 
-        mutate("https://kunda-test2.vercel.app/api/api-handler");
+        mutate(url);
       } catch (error) {
         console.log(error);
       }
@@ -104,26 +103,22 @@ export const HomePage = ({ lists }) => {
         )}
 
         <tbody>
-          {data ? (
-            data.map((record, i) => (
-              <tr key={record._id}>
-                <th scope="row">{i + 1}</th>
-                <td>{record.name}</td>
-                <td>
-                  <Link href={`https://kunda-test2.vercel.app/${record._id}`}>
-                    <i class="bi bi-pencil-square"></i>
-                  </Link>
+          {data.map((record, i) => (
+            <tr key={record._id}>
+              <th scope="row">{i + 1}</th>
+              <td>{record.name}</td>
+              <td>
+                <Link href={`https://kunda-test2.vercel.app/${record._id}`}>
+                  <i class="bi bi-pencil-square"></i>
+                </Link>
 
-                  <i
-                    class="bi bi-x-circle mx-2"
-                    onClick={() => handleDelete(record.name, record._id)}
-                  ></i>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <h4>Loading...</h4>
-          )}
+                <i
+                  class="bi bi-x-circle mx-2"
+                  onClick={() => handleDelete(record.name, record._id)}
+                ></i>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

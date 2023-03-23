@@ -20,8 +20,12 @@ export async function getServerSideProps() {
   console.log(lists);
 
   return {
-    props: {
-      lists: lists ? { lists } : "",
+    // props: {
+    //   lists: lists ? { lists } : "",
+    // },
+    redirect: {
+      destination: "https://kunda-test2.vercel.app/",
+      permanent: true,
     },
   };
 }
