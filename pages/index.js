@@ -10,7 +10,7 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  let a = false;
+  let a = true;
   if (a) {
     return {
       redirect: {
